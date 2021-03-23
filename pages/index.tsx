@@ -16,7 +16,14 @@ const TopPage: FC<Props> = (props) => {
             <ul>
             {recipes.map((recipe) => (
                 <li key={recipe.id}>
-                    <Link href={`recipes/${recipe.id}`}>{recipe.title}</Link>
+                    {recipe.image_url &&
+                    <Link href={`recipes/${recipe.id}`}>
+                        <img src={recipe.image_url} alt={recipe.id.toString()} width='300'/>
+                    </Link>
+                    }
+                    <Link href={`recipes/${recipe.id}`}>
+                    <h2>{recipe.title}</h2>
+                    </Link>
                     <p>{recipe.description}</p>
                 </li>
             ))}
