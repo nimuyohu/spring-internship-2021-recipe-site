@@ -1,3 +1,5 @@
+import { redirect } from "next/dist/next-server/server/api-utils";
+
 export type Recipe = {
     // レシピID
     id: number;
@@ -54,13 +56,25 @@ export type Response = {
     };
 }
 
-export async function searchRecipes(): Promise<Response | null> {
-    const res = await fetch('https://internship-recipe-api.ckpd.co/search?keyword=%E5%A4%A7%E6%A0%B9', {
-        headers: { 'X-Api-Key': process.env.API_KEY as string }
-    });
+export async function searchRecipes(keyword: string): Promise<Response | null> {
+        keyword = encodeURIComponent(keyword)
+        const res = await fetch(`https://internship-recipe-api.ckpd.co/search?keyword=${keyword}`, {
+            headers: { 'X-Api-Key': process.env.API_KEY as string }
+        });
+        
+        const recipes = await res.json();
+        return recipes as Response;
+        // if (res.ok){
+        //     const recipes = await res.json();
+        //     return recipes as Response;
+        // } else {
+        //     console.log('error')
+        // }
+        
 
-    const recipes = await res.json();
-    return recipes as Response;
+    
+    // const recipes = await res.json();
+    // return recipes as Response;
 }
 
 export async function getRecipes(): Promise<Recipe[]> {
