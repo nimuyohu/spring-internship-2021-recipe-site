@@ -1,5 +1,7 @@
 import { FC } from "react";
 import { getRecipes } from '../lib/recipe';
+import Link from 'next/link';
+
 import type { Recipe } from '../lib/recipe'
 
 type Props = {
@@ -13,9 +15,9 @@ const TopPage: FC<Props> = (props) => {
         <div>
             <h1>レシピサイト</h1>
             <ul>
-            {recipes.map((recipe,index) => (
-                <li key={index}>
-                    <h2>{recipe.title}</h2>
+            {recipes.map((recipe) => (
+                <li key={recipe.id}>
+                    <Link href={`recipes/${recipe.id}`}>{recipe.title}</Link>
                     <p>{recipe.description}</p>
                 </li>
             ))}

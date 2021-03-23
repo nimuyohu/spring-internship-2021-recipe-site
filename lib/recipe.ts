@@ -42,3 +42,8 @@ export async function getRecipes(): Promise<Recipe[]> {
     const recipes = await res.json();
     return recipes.recipes as Recipe[];
 }
+
+export async function getRecipe(id: number): Promise<Recipe | null> {
+    const recipes = await getRecipes();
+    return (recipes as Recipe[]).find((recipe) => recipe.id === id) || null;
+}
