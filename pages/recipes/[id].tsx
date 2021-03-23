@@ -14,8 +14,10 @@ export const RecipePage: NextPage<Props> = (props) => {
 
     return (
         <div>
-            <Link href='/'>レシピサイト</Link>
-            <h1>レシピページ</h1>
+            <Link href='/'>
+                <h1>レシピサイト</h1>
+            </Link>
+            <h2>レシピページ</h2>
             {recipe && (
                 <main>
                     {recipe.image_url && (
