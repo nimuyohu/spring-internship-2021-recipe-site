@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { getRecipes } from '../lib/recipe';
+import { getRecipes, searchRecipes } from '../lib/recipe';
 import Link from 'next/link';
 
 import type { Recipe } from '../lib/recipe'
@@ -13,6 +13,9 @@ const TopPage: FC<Props> = (props) => {
     return (
         <div>
             <h1>レシピサイト</h1>
+
+            <input type="text"/>
+
             <ul>
             {recipes.map((recipe) => (
                 <li key={recipe.id}>
@@ -34,6 +37,8 @@ const TopPage: FC<Props> = (props) => {
 
 export const getStaticProps = async () => {
     const recipes = await getRecipes();
+    const foo = await searchRecipes();
+    // console.log(foo)
     return {
         props: {
         recipes: recipes,

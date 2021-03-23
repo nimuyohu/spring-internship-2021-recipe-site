@@ -35,9 +35,37 @@ export type Recipe = {
     related_recipes: number[];
 };
 
+export type QueryParameter = {
+    // 検索キーワード。マルチバイト文字列の場合は URL Encode が必用。
+    keyword: string;
+
+    // ページネーションする場合に指定するページ番号
+    page?: number;
+};
+
+export type Response = {
+    // 検索にヒットしたレシピ一覧
+    recipes: Recipe[];
+
+    // ページネーション可能な場合の次、前のページのリンク
+    links: {
+        next?: string;
+        prev?: string;
+    };
+}
+
+export async function searchRecipes(): Promise<Response | null> {
+    const res = await fetch('https://internship-recipe-api.ckpd.co/search?keyword=%E5%A4%A7%E6%A0%B9', {
+        headers: { 'X-Api-Key': process.env.API_KEY as string }
+    });
+
+    const recipes = await res.json();
+    return recipes as Response;
+}
+
 export async function getRecipes(): Promise<Recipe[]> {
     const res = await fetch('https://internship-recipe-api.ckpd.co/recipes', {
-    headers: { 'X-Api-Key': process.env.API_KEY as string }
+        headers: { 'X-Api-Key': process.env.API_KEY as string }
     });
     const recipes = await res.json();
     return recipes.recipes as Recipe[];
@@ -45,7 +73,7 @@ export async function getRecipes(): Promise<Recipe[]> {
 
 export async function getRecipe(id: number): Promise<Recipe | null> {
     const res = await fetch(`https://internship-recipe-api.ckpd.co/recipes?id=${id}`, {
-        headers: { 'X-Api-Key': process.env.API_KEY as string}
+        headers: { 'X-Api-Key': process.env.API_KEY as string }
     });
 
     const recipes = await res.json();
