@@ -10,7 +10,6 @@ type Props = {
 
 const TopPage: FC<Props> = (props) => {
     const { recipes } = props;
-    console.log(recipes)
     return (
         <div>
             <h1>レシピサイト</h1>
@@ -28,7 +27,6 @@ const TopPage: FC<Props> = (props) => {
 
 export const getStaticProps = async () => {
     const recipes = await getRecipes();
-    console.log(recipes)
     return {
         props: {
         recipes: recipes,
