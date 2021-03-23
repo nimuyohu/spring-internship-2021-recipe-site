@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import Link from 'next/link';
 import type {GetServerSideProps, NextPage} from 'next'
 import {getRecipe, Recipe} from '../../lib/recipe'
 
@@ -10,19 +11,17 @@ type Props = {
 
 export const RecipePage: NextPage<Props> = (props) => {
     const { recipe } = props;
-    console.log(recipe)
 
     return (
         <div>
+            <Link href='/'>レシピサイト</Link>
             <h1>レシピページ</h1>
             {recipe && (
                 <main>
                     {recipe.image_url && (
-                        <img src={recipe.image_url} alt={recipe.title} width={100} />
+                        <img src={recipe.image_url} alt={recipe.title} width={500} />
                     )}
-                    
-                    <h2>{recipe.title}</h2>
-                    <h3>作者：{recipe.author.user_name}</h3>
+                    <h3>{recipe.title}</h3>
                     <h4>{recipe.published_at}</h4>
                     <h3>材料</h3>
                     <ul>
@@ -38,6 +37,7 @@ export const RecipePage: NextPage<Props> = (props) => {
                     </ol>
                 </main>
             )}
+
         </div>
     )
 }
@@ -52,7 +52,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
         
     } else {
-
         const recipe = await getRecipe(id);
 
         return {

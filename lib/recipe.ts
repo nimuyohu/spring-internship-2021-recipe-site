@@ -44,6 +44,10 @@ export async function getRecipes(): Promise<Recipe[]> {
 }
 
 export async function getRecipe(id: number): Promise<Recipe | null> {
-    const recipes = await getRecipes();
-    return (recipes as Recipe[]).find((recipe) => recipe.id === id) || null;
+    const res = await fetch(`https://internship-recipe-api.ckpd.co/recipes?id=${id}`, {
+        headers: { 'X-Api-Key': process.env.API_KEY as string}
+    });
+
+    const recipes = await res.json();
+    return recipes.recipes[0] as Recipe;
 }
