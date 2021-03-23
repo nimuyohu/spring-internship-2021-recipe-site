@@ -37,9 +37,8 @@ export type Recipe = {
 
 export async function getRecipes(): Promise<Recipe[]> {
     const res = await fetch('https://internship-recipe-api.ckpd.co/recipes', {
-    headers: { 'X-Api-Key': process.env.API_KEY }
+    headers: { 'X-Api-Key': process.env.API_KEY as string }
     });
     const recipes = await res.json();
-    // console.log(recipes);
-    return recipes as Recipe[];
+    return recipes.recipes as Recipe[];
 }
