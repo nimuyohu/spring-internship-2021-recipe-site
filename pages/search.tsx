@@ -77,6 +77,9 @@ const TopPage: NextPage<Props> = (props) => {
                     </h1>
                 </div>
             )}
+
+            <h3>前のページ</h3>
+            <h3>次のページ</h3>
         </div>
     );
 };
@@ -101,6 +104,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     recipeFound: true,
                 } as Props,
             };
+    } else {
+        return {
+            props: {
+                recipeFound: false,
+            } as Props,
+        }
+
     }
 
 }

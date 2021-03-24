@@ -65,6 +65,7 @@ export async function searchRecipes(keyword: string): Promise<Response | null> {
         });
 
         const recipes = await res.json();
+        
         return recipes as Response;
         // if (res.ok){
         //     const recipes = await res.json();
@@ -79,12 +80,13 @@ export async function searchRecipes(keyword: string): Promise<Response | null> {
     // return recipes as Response;
 }
 
-export async function getRecipes(): Promise<Recipe[]> {
-    const res = await fetch('https://internship-recipe-api.ckpd.co/recipes', {
+export async function getRecipes(number: number): Promise<Response[] > {
+    const res = await fetch(`https://internship-recipe-api.ckpd.co/recipes?page=${number}`, {
         headers: { 'X-Api-Key': process.env.API_KEY as string }
     });
     const recipes = await res.json();
-    return recipes.recipes as Recipe[];
+    // console.log(recipes)
+    return recipes as Response[];
 }
 
 export async function getRecipe(id: number): Promise<Recipe | null> {
