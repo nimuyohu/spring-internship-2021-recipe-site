@@ -101,14 +101,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     recipeFound: true,
                 } as Props,
             };
-
-            return {
-                props: {
-                    recipeFound: false,
-                } as Props,
-            }
-
-        
     }
 
 }
