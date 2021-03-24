@@ -64,20 +64,7 @@ const TopPage: NextPage<Props> = (props) => {
     }
 
     const { recipes, links } = props;
-    (async()=>{
-        if (links.next){
-            console.log('sokuI')
-            const url = links.next
-            const res = await fetch(url);
-            const resJson = await res.json()
-            if (resJson.message === 'Not Found'){
-                links.next = undefined
-            }
-            console.log(resJson)
-        }
-    })
     
-
     return (
         <div>
             <h1>レシピサイト</h1>
