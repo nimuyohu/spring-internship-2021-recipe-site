@@ -35,6 +35,8 @@ export type Recipe = {
     // 関連するレシピのIDが最大5つ入っている。Poster View などを実装するのに使う。
     // なお、関連レシピの算出アルゴリズムのできが悪いため関連性が低い可能性がある点に注意。
     related_recipes: number[];
+
+    message?: string;
 };
 
 export type QueryParameter = {
@@ -61,7 +63,7 @@ export async function searchRecipes(keyword: string): Promise<Response | null> {
         const res = await fetch(`https://internship-recipe-api.ckpd.co/search?keyword=${keyword}`, {
             headers: { 'X-Api-Key': process.env.API_KEY as string }
         });
-        
+
         const recipes = await res.json();
         return recipes as Response;
         // if (res.ok){

@@ -22,6 +22,8 @@ type Props = {
     prevRecipeAPIParamsString?: string;
 
     searchQuery?: string;
+
+    message?: string;
 };
 
 const TopPage: NextPage<Props> = (props) => {
@@ -31,7 +33,11 @@ const TopPage: NextPage<Props> = (props) => {
         // エンターが押下されたとき検索を開始
         if (e.which == 13) {
             const search = document.getElementById('search') as HTMLInputElement;
-            router.push({pathname:'/search',query: {keyword :search.value}});
+            if (search.value === ''){
+                alert('文字を入力してください')
+            } else {
+                router.push({pathname:'/search',query: {keyword :search.value}});
+            }
         }
     };
 
@@ -78,13 +84,31 @@ const TopPage: NextPage<Props> = (props) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
     console.log(context.query.keyword)
     if (context.query.keyword){
-        const response = await searchRecipes(context.query.keyword.toString())
-        return {
-            props: {
-                recipes: response?.recipes,
-                recipeFound: true,
-            } as Props,
-        };
+
+            const response = await searchRecipes(context.query.keyword.toString())
+
+            if (response.message == 'Not Found'){
+                return {
+                    props: {
+                        recipeFound: false,
+                    } as Props,
+                }
+            }
+
+            return {
+                props: {
+                    recipes: response?.recipes,
+                    recipeFound: true,
+                } as Props,
+            };
+
+            return {
+                props: {
+                    recipeFound: false,
+                } as Props,
+            }
+
+        
     }
 
 }

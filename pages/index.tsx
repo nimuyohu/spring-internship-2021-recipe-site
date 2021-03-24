@@ -16,11 +16,16 @@ type Props = {
 const TopPage: NextPage<Props> = (props) => {
 
     const router = useRouter();
+
     const onSearchSubmitted = (e: any) => {
         // エンターが押下されたとき検索を開始
         if (e.which == 13) {
             const search = document.getElementById('search') as HTMLInputElement;
-            router.push({pathname:'/search',query: {keyword :search.value}});
+            if (search.value === ''){
+                alert('文字を入力してください')
+            } else {
+                router.push({pathname:'/search',query: {keyword :search.value}});
+            }
         }
     };
 
