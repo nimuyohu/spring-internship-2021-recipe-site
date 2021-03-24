@@ -34,7 +34,7 @@ const TopPage: NextPage<Props> = (props) => {
             if (search.value === ''){
                 alert('文字を入力してください')
             } else {
-                router.push({pathname:'/search',query: {keyword :search.value}});
+                router.push({pathname:'/search',query: {keyword :search.value,page :1}});
             }
         }
     };
@@ -64,7 +64,7 @@ const TopPage: NextPage<Props> = (props) => {
     }
 
     const { recipes, links } = props;
-    
+
     return (
         <div>
             <h1>レシピサイト</h1>
@@ -95,9 +95,7 @@ const TopPage: NextPage<Props> = (props) => {
                 </li>
             ))}
             </ul>
-            {links.prev && 
-            <button onClick={GoToPrevPage}>←前のページ</button>
-            } 
+            {links.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
             {links.next && <button onClick={GoToNextPage}>次のページ→</button>}
             
         </div>

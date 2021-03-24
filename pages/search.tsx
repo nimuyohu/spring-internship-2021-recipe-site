@@ -24,6 +24,11 @@ type Props = {
     searchQuery?: string;
 
     message?: string;
+
+    links: {
+        prev?: string
+        next?: string
+    }
 };
 
 const TopPage: NextPage<Props> = (props) => {
@@ -36,12 +41,73 @@ const TopPage: NextPage<Props> = (props) => {
             if (search.value === ''){
                 alert('文字を入力してください')
             } else {
-                router.push({pathname:'/search',query: {keyword :search.value}});
+                router.push({pathname:'/search',query: {keyword :search.value,page :1}});
             }
         }
     };
 
-    const {recipes} = props
+    function getParam(name: string, url: string) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function reverseString(st :string) {
+        return st.split("").reverse().join("");
+    }
+
+    const GoToNextPage = () => {
+        let str = links.next as string ;
+        
+        str = reverseString(str);
+        console.log(str)
+        let num = '';
+        if (str){
+            for (let i=0;i<str.length;i++){
+                if (str[i] === '='){
+                    break
+                }else{
+                    num += str[i];
+                }
+            }
+        
+        num=reverseString(num)
+        }
+        var url = location.search;
+        console.log(url)
+        router.push({query: {keyword :getParam('keyword',location.href),page :Number(num)}})
+        
+    }
+
+    const GoToPrevPage = () => {
+        let str = links.prev as string ;
+        if (getParam('page',location.href) === '2'){
+            router.push({query: {keyword :getParam('keyword',location.href),page :1}})
+        } else {
+        str = reverseString(str);
+        let num = '';
+        if (str){
+            for (let i=0;i<str.length;i++){
+                if (str[i] === '='){
+                    break
+                }else{
+                    num += str[i];
+                }
+            }
+        num=reverseString(num)
+        }
+        var url = location.search;
+        router.push({query: {keyword :getParam('keyword',location.href),page :Number(num)}})
+        }
+    }
+    
+
+    const {recipes, links} = props
+    console.log(links)
     return (
         <div>
             <input
@@ -78,17 +144,18 @@ const TopPage: NextPage<Props> = (props) => {
                 </div>
             )}
 
-            <h3>前のページ</h3>
-            <h3>次のページ</h3>
+        {links.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
+            {links.next && <button onClick={GoToNextPage}>次のページ→</button>}
         </div>
     );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context: any) => {
     console.log(context.query.keyword)
     if (context.query.keyword){
 
-            const response = await searchRecipes(context.query.keyword.toString())
+            const response = await searchRecipes(context.query.keyword.toString(),context.query.page)
+            console.log(context.query)
 
             if (response.message == 'Not Found'){
                 return {
@@ -97,11 +164,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
                     } as Props,
                 }
             }
-
+            console.log(response)
             return {
                 props: {
                     recipes: response?.recipes,
                     recipeFound: true,
+                    links: response?.links
                 } as Props,
             };
     } else {

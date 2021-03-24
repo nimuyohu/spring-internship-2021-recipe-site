@@ -58,9 +58,9 @@ export type Response = {
     };
 }
 
-export async function searchRecipes(keyword: string): Promise<Response | null> {
+export async function searchRecipes(keyword: string,page: number): Promise<Response | null> {
         keyword = encodeURIComponent(keyword)
-        const res = await fetch(`https://internship-recipe-api.ckpd.co/search?keyword=${keyword}`, {
+        const res = await fetch(`https://internship-recipe-api.ckpd.co/search?keyword=${keyword}&page=${page}`, {
             headers: { 'X-Api-Key': process.env.API_KEY as string }
         });
 
