@@ -106,8 +106,7 @@ const TopPage: NextPage<Props> = (props) => {
     }
     
 
-    const {recipes, links} = props
-    console.log(links)
+    const {recipes, keyword , links} = props
     return (
         <div>
             <input
@@ -120,6 +119,7 @@ const TopPage: NextPage<Props> = (props) => {
             <button>
                 🔎
             </button>
+            <h1>{keyword}の検索結果</h1>
             {props.recipeFound ? (
                 <ul>
                 {recipes.map((recipe) => (
@@ -144,8 +144,8 @@ const TopPage: NextPage<Props> = (props) => {
                 </div>
             )}
 
-        {links.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
-            {links.next && <button onClick={GoToNextPage}>次のページ→</button>}
+        {links?.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
+        {links?.next && <button onClick={GoToNextPage}>次のページ→</button>}
         </div>
     );
 };
@@ -156,7 +156,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
 
             const response = await searchRecipes(context.query.keyword.toString(),context.query.page)
             console.log(context.query)
-
+            console.log(response)
             if (response.message == 'Not Found'){
                 return {
                     props: {
@@ -164,12 +164,12 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
                     } as Props,
                 }
             }
-            console.log(response)
             return {
                 props: {
                     recipes: response?.recipes,
                     recipeFound: true,
-                    links: response?.links
+                    links: response?.links,
+                    keyword: context.query.keyword.toString()
                 } as Props,
             };
     } else {

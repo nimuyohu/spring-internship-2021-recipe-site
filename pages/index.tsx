@@ -63,7 +63,7 @@ const TopPage: NextPage<Props> = (props) => {
 
     }
 
-    const { recipes, links } = props;
+    const { recipes, links} = props;
 
     return (
         <div>
@@ -95,8 +95,8 @@ const TopPage: NextPage<Props> = (props) => {
                 </li>
             ))}
             </ul>
-            {links.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
-            {links.next && <button onClick={GoToNextPage}>次のページ→</button>}
+            {links?.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
+            {links?.next && <button onClick={GoToNextPage}>次のページ→</button>}
             
         </div>
     )
