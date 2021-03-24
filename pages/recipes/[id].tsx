@@ -1,8 +1,9 @@
-import { FC } from 'react';
 
 import Link from 'next/link';
 import type {GetServerSideProps, NextPage} from 'next'
 import {getRecipe, Recipe} from '../../lib/recipe'
+
+import {Container, Row, Col, Button, Navbar, FormControl, InputGroup, Card} from 'react-bootstrap';
 
 
 type Props = {
@@ -14,14 +15,16 @@ export const RecipePage: NextPage<Props> = (props) => {
 
     return (
         <div>
-            <Link href='/'>
-                <h1>レシピサイト</h1>
-            </Link>
-            <h2>レシピページ</h2>
+            <Navbar bg="dark" variant="dark">
+                <Link href='/'><Navbar.Brand href="/">レシピサイト🍳~料理が楽しい生活を~</Navbar.Brand></Link>
+            </Navbar>
+
+            <Container >
+
             {recipe && (
                 <main>
                     {recipe.image_url && (
-                        <img src={recipe.image_url} alt={recipe.title} width={500} />
+                        <img src={recipe.image_url} alt={recipe.title} width={100} />
                     )}
                     <h3>{recipe.title}</h3>
                     <h4>{recipe.published_at}</h4>
@@ -40,6 +43,7 @@ export const RecipePage: NextPage<Props> = (props) => {
                 </main>
             )}
 
+            </Container>
         </div>
     )
 }

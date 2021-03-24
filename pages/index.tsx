@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 
 import type { Recipe } from '../lib/recipe'
 
+import {Container, Row, Col, Button, Navbar, FormControl, InputGroup, Card} from 'react-bootstrap';
+
 
 
 type Props = {
@@ -39,6 +41,15 @@ const TopPage: NextPage<Props> = (props) => {
         }
     };
 
+    const onSearchClick = () => {
+        const search = document.getElementById('search') as HTMLInputElement;
+        if (search.value === ''){
+            alert('文字を入力してください')
+        } else {
+            router.push({pathname:'/search',query: {keyword :search.value,page :1}});
+        }
+    }
+
     const GoToPrevPage = () => {
         console.log(links.prev)
         let paramsString = links.prev;
@@ -67,37 +78,59 @@ const TopPage: NextPage<Props> = (props) => {
 
     return (
         <div>
-            <h1>レシピサイト</h1>
 
-            <input
+            <Navbar bg="dark" variant="dark">
+                <Link href='/'><Navbar.Brand href="/">レシピサイト🍳~料理が楽しい生活を~</Navbar.Brand></Link>
+            </Navbar>
+            <Container >
+
+            <InputGroup className="mb-3 mt-3" size="lg">
+                <FormControl
+                placeholder="料理を検索"
+                aria-label="Recipient's username"
+                aria-describedby="basic-addon2"
+                size="lg"
                 id='search'
                 type="search"
                 name="search"
-                placeholder="検索"
                 onKeyPress={onSearchSubmitted}
-            />
-            <button>
-                🔎
-            </button>
+                />
+                <InputGroup.Append>
+                    <Button variant="outline-secondary" onClick={onSearchClick}>🔎</Button>
+                </InputGroup.Append>
+            </InputGroup>
 
-            <ul>
-            {recipes.map((recipe) => (
-                <li key={recipe.id}>
-                    {recipe.image_url &&
-                    <Link href={`recipes/${recipe.id}`}>
-                        <img src={recipe.image_url} alt={recipe.id.toString()} width='300'/>
-                    </Link>
-                    }
-                    <Link href={`recipes/${recipe.id}`}>
-                    <h2>{recipe.title}</h2>
-                    </Link>
-                    <p>{recipe.description}</p>
+            <ul style={{padding: '0'}}>
+                
+            {recipes.map((recipe,index) => (
+                <li style={{listStyle: 'none'}} key={index} className='mb-3'>
+                    <Row>
+                        <Col >
+                            <Card>
+                            <Link href={`recipes/${recipe.id}`}>
+                                <Card.Img variant="top" src={recipe.image_url} />
+                            </Link>
+                            <Card.Body>
+                                <Card.Title>{recipe.title}</Card.Title>
+                                <Card.Text>
+                                {recipe.description}
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                <small className="text-muted">{recipe.published_at}</small>
+                            </Card.Footer>
+                            </Card>
+                        </Col>
+                    </Row>
                 </li>
             ))}
             </ul>
-            {links?.prev && <button onClick={GoToPrevPage}>←前のページ</button>} 
-            {links?.next && <button onClick={GoToNextPage}>次のページ→</button>}
-            
+
+            <Row>
+            {links?.prev && <Col><Button onClick={GoToPrevPage} className='mb-3' >←前のページ</Button></Col>} 
+            {links?.next && <Col><Button onClick={GoToNextPage} className='mb-3 text-center' >次のページ→</Button></Col>}
+            </Row>
+            </Container>
         </div>
     )
 };
