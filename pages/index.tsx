@@ -70,8 +70,6 @@ const TopPage: NextPage<Props> = (props) => {
 
         const pageNumber = searchParams.get('https://internship-recipe-api.ckpd.co/recipes?page')
             router.push({query: {page :pageNumber}})
-
-
     }
 
     const { recipes, links} = props;
@@ -111,7 +109,9 @@ const TopPage: NextPage<Props> = (props) => {
                                 <Card.Img variant="top" src={recipe.image_url} />
                             </Link>
                             <Card.Body>
-                                <Card.Title>{recipe.title}</Card.Title>
+                                <Link href={`recipes/${recipe.id}`}>
+                                    <Card.Title>{recipe.title}</Card.Title>
+                                </Link>
                                 <Card.Text>
                                 {recipe.description}
                                 </Card.Text>

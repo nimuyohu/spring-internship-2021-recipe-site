@@ -77,9 +77,9 @@ export const RecipePage: NextPage<Props> = (props) => {
                         </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-      <small className="text-muted">Last updated 3 mins ago</small>
-    </Card.Footer>
-  </Card>
+                    <small className="text-muted">Last updated 3 mins ago</small>
+            </Card.Footer>
+        </Card>
                         </>
                     )}
                     <h3>材料</h3>
