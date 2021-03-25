@@ -25,8 +25,8 @@ type Props = {
     message?: string;
 
     links: {
-        prev?: string
-        next?: string
+        prev?: string;
+        next?: string;
     }
 };
 

@@ -1,14 +1,17 @@
 import { FC } from "react";
 import type { Recipe } from '../lib/recipe'
-import { Row, Col, Card, CardDeck} from 'react-bootstrap';
+import { Col, Card, CardDeck} from 'react-bootstrap';
 import Link from 'next/link';
+import Image from 'next/image'
 
 type Props = {
     recipes: Recipe[];
 };
 
+
 export const RecipesList: FC<Props>= (props) => {
     const  {recipes} = props
+
     return (
         <ul style={{padding: '0'}}>
             <CardDeck>
@@ -17,7 +20,12 @@ export const RecipesList: FC<Props>= (props) => {
                 <Card key={index}>
                 {recipe.image_url ? (
                                     <Link href={`recipes/${recipe.id}`}>
-                                        <Card.Img variant="top" src={recipe.image_url} />
+                                        <Image
+                                            src={recipe.image_url}
+                                            alt="Picture"
+                                            width={800}
+                                            height={500}
+                                        />
                                     </Link>
                                     ) : (
                                     <Link href={`recipes/${recipe.id}`}>

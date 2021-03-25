@@ -6,6 +6,7 @@ import { Header } from '../../components/header'
 import { Input } from '../../components/input'
 import {Container, Card, Table} from 'react-bootstrap';
 import Head from 'next/head';
+import Image from 'next/image'
 
 type Props = {
     recipe: Recipe;
@@ -47,7 +48,12 @@ export const RecipePage: NextPage<Props> = (props) => {
                     {recipe.image_url ? (
                         <>
                         <Card>
-                            <Card.Img variant="top" src={recipe.image_url} />
+                            <Image
+                                src={recipe.image_url}
+                                alt="Picture"
+                                width={800}
+                                height={500}
+                            />
                             <Card.Body>
                                 <Card.Title>{recipe.title}</Card.Title>
                                 <Card.Text>
