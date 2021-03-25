@@ -20,7 +20,6 @@ export const RecipePage: NextPage<Props> = (props) => {
                 <title>{recipe.title}</title>
                 <meta property="og:title" content={recipe.title} />
                 <meta property="og:description" content={recipe.description} />
-                <meta property="og:type" content="blog" />
                 <meta property="og:url" content={ location.href } />
                 {recipe.image_url ? 
                 (<meta property="og:image" content={ recipe.image_url } />)
@@ -37,7 +36,7 @@ export const RecipePage: NextPage<Props> = (props) => {
                 (<meta name="twitter:image" content={ recipe.image_url } />)
                 :
                 (
-                <meta name="twitter:image" content={'/images/cooking_frypan_teflon.png'} />
+                <meta name="twitter:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
                 )}
             </Head>
             <Header />
