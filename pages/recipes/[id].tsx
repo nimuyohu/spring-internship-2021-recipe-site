@@ -25,7 +25,7 @@ export const RecipePage: NextPage<Props> = (props) => {
                 (<meta property="og:image" content={ recipe.image_url } />)
                 :
                 (
-                <meta property="og:image" content={'/images/cooking_frypan_teflon.png'} />
+                <meta property="og:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
                 )}
                 <meta property="og:site_name" content='レシピサイト🍳' />
                 <meta name="twitter:card" content="summary" />
