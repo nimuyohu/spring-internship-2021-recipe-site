@@ -133,7 +133,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         
     } else {
         const recipe = await getRecipe(id);
-        console.log(recipe)
 
         return {
             props: {

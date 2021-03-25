@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Header } from '../components/header'
 import { Input } from '../components/input'
+import Head from 'next/head';
 
 
 import type { Recipe } from '../lib/recipe'
@@ -68,6 +69,14 @@ const TopPage: NextPage<Props> = (props) => {
 
     return (
         <div>
+            <Head>
+            <title>レシピサイト🍳</title>
+            <meta name="twitter:card" content="summary" />
+            <meta property="og:url" content='https://spring-internship-2021-recipe-site-nimuyohu.vercel.app/' />
+            <meta property="og:title" content='レシピサイト🍳' />
+            <meta property="og:description" content='レシピを検索できるサイト' />
+            <meta property="og:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
+            </Head>
             <Header />
             <Container >
                 <Input />
