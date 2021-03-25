@@ -13,7 +13,7 @@ export const RecipesList: FC<Props>= (props) => {
         <ul style={{padding: '0'}}>
             <CardDeck>
             {recipes.map((recipe,index) => (
-                <Col md={6} style={{padding: '0'}}>
+                <Col md={6} style={{padding: '0'}} key={index}>
                 <Card key={index}>
                 {recipe.image_url ? (
                                     <Link href={`recipes/${recipe.id}`}>
