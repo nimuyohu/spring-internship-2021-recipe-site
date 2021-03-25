@@ -144,35 +144,39 @@ const TopPage: NextPage<Props> = (props) => {
 export const getServerSideProps = async (context: any) => {
     // console.log(context)
     if (context.resolvedUrl === '/'){
-        const recipes = await getRecipes(1);
+        const response = await getRecipes(1);
         return {
             props: {
-            recipes: recipes.recipes,
-            links: recipes.links
-            },
+            recipes: response?.recipes,
+            links: response?.links
+            }
         };
     } else {
-        const recipes = await getRecipes(context.query.page);
-        const res = await fetch(recipes.links.next, {
-            headers: { 'X-Api-Key': process.env.API_KEY as string }
-        })
+        const response = await getRecipes(context.query.page);
+        if (response != null && response?.links.next){
+            const res = await fetch(response.links.next, {
+                headers: { 'X-Api-Key': process.env.API_KEY as string }
+            })
+        
         const resJson = await res.json()
+        console.log(resJson)
         if (resJson.message === 'Not Found'){
             return {
                 props: {
-                recipes: recipes.recipes,
+                recipes: response?.recipes,
                 links: {
-                    prev: recipes.links.prev
+                    prev: response?.links.prev
                 }
                 },
             };
         } else {
         return {
             props: {
-            recipes: recipes.recipes,
-            links: recipes.links
+            recipes: response?.recipes,
+            links: response?.links
             },
         };
+    }
     }
     }
 };

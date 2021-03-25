@@ -80,13 +80,13 @@ export async function searchRecipes(keyword: string,page: number): Promise<Respo
     // return recipes as Response;
 }
 
-export async function getRecipes(number: number): Promise<Response[] > {
+export async function getRecipes(number: number): Promise<Response | null> {
     const res = await fetch(`https://internship-recipe-api.ckpd.co/recipes?page=${number}`, {
         headers: { 'X-Api-Key': process.env.API_KEY as string }
     });
     const recipes = await res.json();
     // console.log(recipes)
-    return recipes as Response[];
+    return recipes as Response;
 }
 
 export async function getRecipe(id: number): Promise<Recipe | null> {
