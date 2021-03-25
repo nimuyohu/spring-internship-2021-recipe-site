@@ -5,9 +5,7 @@ import {getRecipe, Recipe} from '../../lib/recipe'
 import { Header } from '../../components/header'
 import { Input } from '../../components/input'
 import {Container, Card, Table} from 'react-bootstrap';
-import { useRouter } from 'next/router';
-
-
+import Head from 'next/head';
 
 type Props = {
     recipe: Recipe;
@@ -18,6 +16,30 @@ export const RecipePage: NextPage<Props> = (props) => {
 
     return (
         <div>
+            <Head>
+                <title>{recipe.title}</title>
+                <meta property="og:title" content={recipe.title} />
+                <meta property="og:description" content={recipe.description} />
+                <meta property="og:type" content="blog" />
+                <meta property="og:url" content={ location.href } />
+                {recipe.image_url ? 
+                (<meta property="og:image" content={ recipe.image_url } />)
+                :
+                (
+                <meta property="og:image" content={'/images/cooking_frypan_teflon.png'} />
+                )}
+                <meta property="og:site_name" content='レシピサイト🍳' />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:url" content={ location.href } />
+                <meta name="twitter:title" content={recipe.title} />
+                <meta name="twitter:description" content={recipe.description} />
+                {recipe.image_url ? 
+                (<meta name="twitter:image" content={ recipe.image_url } />)
+                :
+                (
+                <meta name="twitter:image" content={'/images/cooking_frypan_teflon.png'} />
+                )}
+            </Head>
             <Header />
             <Container >
             <Input />
