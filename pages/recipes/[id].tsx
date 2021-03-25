@@ -1,5 +1,3 @@
-
-import Link from 'next/link';
 import type {GetServerSideProps, NextPage} from 'next'
 import {getRecipe, Recipe} from '../../lib/recipe'
 import { Header } from '../../components/header'

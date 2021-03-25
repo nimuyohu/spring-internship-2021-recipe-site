@@ -67,20 +67,7 @@ export async function searchRecipes(keyword: string,page: number): Promise<Respo
         });
 
         const recipes = await res.json();
-
-        
         return recipes as Response;
-        // if (res.ok){
-        //     const recipes = await res.json();
-        //     return recipes as Response;
-        // } else {
-        //     console.log('error')
-        // }
-        
-
-    
-    // const recipes = await res.json();
-    // return recipes as Response;
 }
 
 export async function getRecipes(number: number): Promise<Response | null> {

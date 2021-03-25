@@ -1,5 +1,4 @@
 import { GetServerSideProps, NextPage } from "next";
-import Link from 'next/link';
 import {searchRecipes} from '../lib/recipe'
 import { useRouter } from 'next/router';
 import { Header } from '../components/header'

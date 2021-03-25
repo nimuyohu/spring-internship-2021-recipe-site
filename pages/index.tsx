@@ -1,6 +1,5 @@
-import { GetServerSideProps, NextPage } from "next";
-import { getRecipes, searchRecipes } from '../lib/recipe';
-import Link from 'next/link';
+import { NextPage } from "next";
+import { getRecipes } from '../lib/recipe';
 import { useRouter } from 'next/router';
 import { Header } from '../components/header'
 import { Input } from '../components/input'

@@ -8,7 +8,6 @@ type Props = {
     recipes: Recipe[];
 };
 
-
 export const RecipesList: FC<Props>= (props) => {
     const  {recipes} = props
 
