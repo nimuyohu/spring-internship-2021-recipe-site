@@ -13,13 +13,18 @@ type Props = {
     // このページで表示するレシピのリスト
     recipes: Recipe[];
 
+    // 検索欄に入力されたキーワード
+    keyword?: string;
+
     searchQuery?: string;
+
+    message?: string;
 
     links: {
         prev?: string
         next?: string
     }
-}
+};
 
 
 
@@ -140,7 +145,7 @@ const TopPage: NextPage<Props> = (props) => {
     )
 };
 
-export const getServerSideProps :GetServerSideProps<Props> = async (context: any) => {
+export const getServerSideProps = async (context: any) => {
     // console.log(context)
     if (context.resolvedUrl === '/'){
         const response = await getRecipes(1);
