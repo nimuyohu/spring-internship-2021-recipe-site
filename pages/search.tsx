@@ -4,6 +4,7 @@ import {searchRecipes} from '../lib/recipe'
 import { useRouter } from 'next/router';
 import { Header } from '../components/header'
 import { Input } from '../components/input'
+import { RecipesList } from '../components/recipiesList';
 
 import type {Recipe} from '../lib/recipe'
 
@@ -85,39 +86,7 @@ const TopPage: NextPage<Props> = (props) => {
 
             <h2>{keyword}の検索結果</h2>
             {props.recipeFound ? (
-                <ul style={{padding: '0'}}>
-                
-                {recipes.map((recipe,index) => (
-                    <li style={{listStyle: 'none'}} key={index} className='mb-3'>
-                        <Row>
-                            <Col >
-                                <Card>
-                                {recipe.image_url ? (
-                                <Link href={`recipes/${recipe.id}`}>
-                                    <Card.Img variant="top" src={recipe.image_url} />
-                                </Link>
-                                ) : (
-                                    <Link href={`recipes/${recipe.id}`}>
-                                        <Card.Img variant="top" src='/images/noimage.png' />
-                                    </Link>
-                                    )}
-                                <Card.Body>
-                                <Link href={`recipes/${recipe.id}`}>
-                                    <Card.Title>{recipe.title}</Card.Title>
-                                </Link>
-                                    <Card.Text>
-                                    {recipe.description}
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer>
-                                    <small className="text-muted">{recipe.published_at}</small>
-                                </Card.Footer>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </li>
-                ))}
-                </ul>
+                <RecipesList recipes={recipes} />
             ) : (
                 <div>
                     <Alert variant='dark'>
