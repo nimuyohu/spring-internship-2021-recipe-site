@@ -16,29 +16,6 @@ type Props = {
 export const RecipePage: NextPage<Props> = (props) => {
     const { recipe } = props;
 
-    const router = useRouter();
-
-    const onSearchSubmitted = (e: any) => {
-        // エンターが押下されたとき検索を開始
-        if (e.which == 13) {
-            const search = document.getElementById('search') as HTMLInputElement;
-            if (search.value === ''){
-                alert('文字を入力してください')
-            } else {
-                router.push({pathname:'/search',query: {keyword :search.value,page :1}});
-            }
-        }
-    };
-
-    const onSearchClick = () => {
-        const search = document.getElementById('search') as HTMLInputElement;
-        if (search.value === ''){
-            alert('文字を入力してください')
-        } else {
-            router.push({pathname:'/search',query: {keyword :search.value,page :1}});
-        }
-    }
-
     return (
         <div>
             <Header />

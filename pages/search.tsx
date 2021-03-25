@@ -59,19 +59,6 @@ const TopPage: NextPage<Props> = (props) => {
         return decodeURIComponent(results[2].replace(/\+/g, " "));
     }
 
-    function reverseString(st :string) {
-        return st.split("").reverse().join("");
-    }
-
-    const onSearchClick = () => {
-        const search = document.getElementById('search') as HTMLInputElement;
-        if (search.value === ''){
-            alert('文字を入力してください')
-        } else {
-            router.push({pathname:'/search',query: {keyword :search.value,page :1}});
-        }
-    }
-
     const GoToNextPage = () => {
         let num = 0;
         num = Number(getParam('page',location.href)) + 1

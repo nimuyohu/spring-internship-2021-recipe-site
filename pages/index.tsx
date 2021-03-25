@@ -32,21 +32,7 @@ type Props = {
 
 const TopPage: NextPage<Props> = (props) => {
 
-    // console.log(props.recipes)
-
     const router = useRouter();
-
-    const onSearchSubmitted = (e: any) => {
-        // エンターが押下されたとき検索を開始
-        if (e.which == 13) {
-            const search = document.getElementById('search') as HTMLInputElement;
-            if (search.value === ''){
-                alert('文字を入力してください')
-            } else {
-                router.push({pathname:'/search',query: {keyword :search.value,page :1}});
-            }
-        }
-    };
 
     function getParam(name: string, url: string) {
         if (!url) url = window.location.href;
@@ -56,15 +42,6 @@ const TopPage: NextPage<Props> = (props) => {
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
-
-    const onSearchClick = () => {
-        const search = document.getElementById('search') as HTMLInputElement;
-        if (search.value === ''){
-            alert('文字を入力してください')
-        } else {
-            router.push({pathname:'/search',query: {keyword :search.value,page :1}});
-        }
     }
 
     const GoToPrevPage = () => {
