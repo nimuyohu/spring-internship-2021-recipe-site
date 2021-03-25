@@ -65,22 +65,26 @@ export const RecipePage: NextPage<Props> = (props) => {
 
             {recipe && (
                 <main>
-                    {recipe.image_url && (
+                    {recipe.image_url ? (
                         <>
                         <Card>
-                        <Card.Img variant="top" src={recipe.image_url} />
-                        <Card.Body>
-                        <Card.Title>{recipe.title}</Card.Title>
-                        <Card.Text>
-                            {recipe.description}
-                            <p><small>作者：{recipe.author.user_name}</small></p>
-                        </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                    <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
-        </Card>
+                            <Card.Img variant="top" src={recipe.image_url} />
+                            <Card.Body>
+                                <Card.Title>{recipe.title}</Card.Title>
+                                <Card.Text>
+                                    {recipe.description}
+                                </Card.Text>
+                                <Card.Text>
+                                    <small>作者：{recipe.author.user_name}</small>
+                                </Card.Text>
+                            </Card.Body>
+                            <Card.Footer>
+                                <small className="text-muted">Last updated 3 mins ago</small>
+                            </Card.Footer>
+                        </Card>
                         </>
+                    ) : (
+                        <h3>{recipe.title}</h3>
                     )}
                     <h3>材料</h3>
                     <Table striped bordered hover  size="sm">
@@ -91,18 +95,18 @@ export const RecipePage: NextPage<Props> = (props) => {
                             </tr>
                         </thead>
                             
-                        
                         <tbody>
                             {recipe.ingredients.map((ingredient,index) => (
-                            <tr>
+                            <tr key={index}>
                                 <td>{ingredient.name}</td>
                                 <td>{ingredient.quantity}</td>
                             </tr>
                             ))}
-                        
                         </tbody>
                     </Table>
-                    <h4>手順</h4>
+
+                    <h3>手順</h3>
+
                     <Table striped bordered hover variant="dark" responsive="sm">
                         <thead>
                             <tr>
@@ -111,10 +115,9 @@ export const RecipePage: NextPage<Props> = (props) => {
                             </tr>
                         </thead>
                             
-                        
                         <tbody>
                             {recipe.steps.map((step,index) => (
-                            <tr>
+                            <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{step}</td>
                             </tr>

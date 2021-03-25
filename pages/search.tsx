@@ -156,9 +156,9 @@ const TopPage: NextPage<Props> = (props) => {
                                     <Card.Img variant="top" src={recipe.image_url} />
                                 </Link>
                                 ) : (
-                                    <Card.Title>
-                                        Not Found Image
-                                    </Card.Title>
+                                    <Link href={`recipes/${recipe.id}`}>
+                                        <Card.Img variant="top" src='/images/noimage.png' />
+                                    </Link>
                                     )}
                                 <Card.Body>
                                 <Link href={`recipes/${recipe.id}`}>
