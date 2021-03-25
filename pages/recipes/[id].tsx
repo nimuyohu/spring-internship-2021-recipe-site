@@ -18,7 +18,7 @@ export const RecipePage: NextPage<Props> = (props) => {
         <div>
             <Head>
                 <title>{recipe.title}</title>
-                <meta name="twitter:card" content="カード種類" />
+                <meta name="twitter:card" content="card" />
                 <meta property="og:url" content={ location.href } />
                 <meta property="og:title" content={ recipe.title } />
                 <meta property="og:description" content={ recipe.description } />
