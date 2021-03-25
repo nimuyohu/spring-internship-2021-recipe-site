@@ -18,25 +18,17 @@ export const RecipePage: NextPage<Props> = (props) => {
         <div>
             <Head>
                 <title>{recipe.title}</title>
-                <meta property="og:title" content={recipe.title} />
-                <meta property="og:description" content={recipe.description} />
+                <meta name="twitter:card" content="カード種類" />
                 <meta property="og:url" content={ location.href } />
+                <meta property="og:title" content={ recipe.title } />
+                <meta property="og:description" content={ recipe.description } />
                 {recipe.image_url ? 
-                (<meta property="og:image" content={ recipe.image_url } />)
+                (
+                <meta property="og:image" content={ recipe.image_url } />
+                )
                 :
                 (
                 <meta property="og:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
-                )}
-                <meta property="og:site_name" content='レシピサイト🍳' />
-                <meta name="twitter:card" content="summary" />
-                <meta name="twitter:url" content={ location.href } />
-                <meta name="twitter:title" content={recipe.title} />
-                <meta name="twitter:description" content={recipe.description} />
-                {recipe.image_url ? 
-                (<meta name="twitter:image" content={ recipe.image_url } />)
-                :
-                (
-                <meta name="twitter:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
                 )}
             </Head>
             <Header />
