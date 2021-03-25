@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import Link from 'next/link';
 import {searchRecipes} from '../lib/recipe'
 import { useRouter } from 'next/router';
+import { Header } from '../components/header'
 
 import type {Recipe} from '../lib/recipe'
 
@@ -91,12 +92,8 @@ const TopPage: NextPage<Props> = (props) => {
     const {recipes, keyword , links} = props
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
-                <Link href='/'><Navbar.Brand href="/">レシピサイト🍳~料理が楽しい生活を~</Navbar.Brand></Link>
-            </Navbar>
-
+            <Header />
             <Container >
-
             <InputGroup className="mb-3 mt-3" size="lg">
                 <FormControl
                 placeholder="料理を検索"

@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getRecipes, searchRecipes } from '../lib/recipe';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { Header } from '../components/header'
 
 import type { Recipe } from '../lib/recipe'
 
@@ -88,9 +89,7 @@ const TopPage: NextPage<Props> = (props) => {
     return (
         <div>
 
-            <Navbar bg="dark" variant="dark">
-                <Link href='/'><Navbar.Brand href="/">レシピサイト🍳~料理が楽しい生活を~</Navbar.Brand></Link>
-            </Navbar>
+            <Header />
             <Container >
 
             <InputGroup className="mb-3 mt-3" size="lg">
@@ -152,7 +151,6 @@ const TopPage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps = async (context: any) => {
-    // console.log(context)
     if (context.resolvedUrl === '/'){
         const response = await getRecipes(1);
         return {

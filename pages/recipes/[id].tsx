@@ -2,9 +2,11 @@
 import Link from 'next/link';
 import type {GetServerSideProps, NextPage} from 'next'
 import {getRecipe, Recipe} from '../../lib/recipe'
+import { Header } from '../../components/header'
 
 import {Container, Row, Col, Button, Navbar, FormControl, InputGroup, Card, Table} from 'react-bootstrap';
 import { useRouter } from 'next/router';
+
 
 
 type Props = {
@@ -39,10 +41,7 @@ export const RecipePage: NextPage<Props> = (props) => {
 
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
-                <Link href='/'><Navbar.Brand href="/">レシピサイト🍳~料理が楽しい生活を~</Navbar.Brand></Link>
-            </Navbar>
-
+            <Header />
             <Container >
 
             <InputGroup className="mb-3 mt-3" size="lg">
