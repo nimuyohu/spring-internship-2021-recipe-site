@@ -66,7 +66,6 @@ const TopPage: NextPage<Props> = (props) => {
     }
 
     const GoToPrevPage = () => {
-        console.log(links.prev)
         let paramsString = links.prev;
         if (paramsString === 'https://internship-recipe-api.ckpd.co/recipes'){
             router.push({query: {page :1}})
@@ -168,9 +167,9 @@ export const getServerSideProps = async (context: any) => {
             const res = await fetch(response.links.next, {
                 headers: { 'X-Api-Key': process.env.API_KEY as string }
             })
-        
         const resJson = await res.json()
-        console.log(resJson)
+
+        // もし、次のページがNot Founの時は、nextのリンクを渡さない
         if (resJson.message === 'Not Found'){
             return {
                 props: {

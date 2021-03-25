@@ -166,12 +166,10 @@ const TopPage: NextPage<Props> = (props) => {
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async (context: any) => {
-    console.log(context.query.keyword)
+
     if (context.query.keyword){
 
-            const response = await searchRecipes(context.query.keyword.toString(),context.query.page)
-            console.log(context.query)
-            console.log(response)
+            const response = await searchRecipes(context.query.keyword.toString(),context.query.page
             if (response != null && response.message == 'Not Found'){
                 return {
                     props: {
