@@ -3,8 +3,8 @@ import Link from 'next/link';
 import type {GetServerSideProps, NextPage} from 'next'
 import {getRecipe, Recipe} from '../../lib/recipe'
 import { Header } from '../../components/header'
-
-import {Container, Row, Col, Button, Navbar, FormControl, InputGroup, Card, Table} from 'react-bootstrap';
+import { Input } from '../../components/input'
+import {Container, Card, Table} from 'react-bootstrap';
 import { useRouter } from 'next/router';
 
 
@@ -43,25 +43,7 @@ export const RecipePage: NextPage<Props> = (props) => {
         <div>
             <Header />
             <Container >
-
-            <InputGroup className="mb-3 mt-3" size="lg">
-                <FormControl
-                placeholder="料理を検索"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                size="lg"
-                id='search'
-                type="search"
-                name="search"
-                onKeyPress={onSearchSubmitted}
-                />
-                <InputGroup.Append>
-                    <Button variant="outline-secondary" onClick={onSearchClick}>🔎</Button>
-                </InputGroup.Append>
-            </InputGroup>
-
-            
-
+            <Input />
             {recipe && (
                 <main>
                     {recipe.image_url ? (

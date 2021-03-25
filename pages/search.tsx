@@ -3,10 +3,11 @@ import Link from 'next/link';
 import {searchRecipes} from '../lib/recipe'
 import { useRouter } from 'next/router';
 import { Header } from '../components/header'
+import { Input } from '../components/input'
 
 import type {Recipe} from '../lib/recipe'
 
-import {Container, Row, Col, Button, Navbar, FormControl, InputGroup, Card, Alert} from 'react-bootstrap';
+import {Container, Row, Col, Button, Card, Alert} from 'react-bootstrap';
 
 type Props = {
     // このページで表示するレシピのリスト
@@ -35,7 +36,6 @@ type Props = {
 };
 
 const TopPage: NextPage<Props> = (props) => {
-
     const router = useRouter();
     const onSearchSubmitted = (e: any) => {
         // エンターが押下されたとき検索を開始
@@ -94,21 +94,7 @@ const TopPage: NextPage<Props> = (props) => {
         <div>
             <Header />
             <Container >
-            <InputGroup className="mb-3 mt-3" size="lg">
-                <FormControl
-                placeholder="料理を検索"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-                size="lg"
-                id='search'
-                type="search"
-                name="search"
-                onKeyPress={onSearchSubmitted}
-                />
-                <InputGroup.Append>
-                    <Button variant="outline-secondary" onClick={onSearchClick}>🔎</Button>
-                </InputGroup.Append>
-            </InputGroup>
+            <Input />
 
             <h2>{keyword}の検索結果</h2>
             {props.recipeFound ? (
