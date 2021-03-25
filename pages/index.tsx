@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { getRecipes, searchRecipes } from '../lib/recipe';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -140,7 +140,7 @@ const TopPage: NextPage<Props> = (props) => {
     )
 };
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps :GetServerSideProps<Props> = async (context: any) => {
     // console.log(context)
     if (context.resolvedUrl === '/'){
         const response = await getRecipes(1);

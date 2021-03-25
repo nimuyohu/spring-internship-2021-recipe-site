@@ -194,7 +194,7 @@ const TopPage: NextPage<Props> = (props) => {
     );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context: any) => {
+export const getServerSideProps: GetServerSideProps<Props> = async (context: any) => {
     console.log(context.query.keyword)
     if (context.query.keyword){
 
