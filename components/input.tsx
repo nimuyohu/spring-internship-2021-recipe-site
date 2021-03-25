@@ -1,14 +1,15 @@
 import {Button, FormControl, InputGroup} from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import { FC } from "react";
 
-export const Input = (props) => {
+export const Input: FC = () => {
 
     const router = useRouter();
 
-    const onSearchSubmitted = (e) => {
+    const onSearchSubmitted = (e: any) => {
         // エンターが押下されたとき検索を開始
         if (e.which == 13) {
-            const search = document.getElementById('search');
+            const search = document.getElementById('search') as HTMLInputElement;
             if (search.value === ''){
                 alert('文字を入力してください')
             } else {
@@ -18,7 +19,7 @@ export const Input = (props) => {
     };
 
     const onSearchClick = () => {
-        const search = document.getElementById('search');
+        const search = document.getElementById('search') as HTMLInputElement;
         if (search.value === ''){
             alert('文字を入力してください')
         } else {
