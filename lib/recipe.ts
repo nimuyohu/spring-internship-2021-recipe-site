@@ -67,6 +67,7 @@ export async function searchRecipes(keyword: string,page: number): Promise<Respo
         });
 
         const recipes = await res.json();
+
         
         return recipes as Response;
         // if (res.ok){
@@ -96,6 +97,12 @@ export async function getRecipe(id: number): Promise<Recipe | null> {
         headers: { 'X-Api-Key': process.env.API_KEY as string }
     });
 
+
     const recipes = await res.json();
-    return recipes.recipes[0] as Recipe;
+    // console.log(recipes)
+    if (recipes.message && recipes.message === 'Not Found'){
+        return recipes as Recipe;
+    } else {
+        return recipes.recipes[0] as Recipe;
+    }
 }

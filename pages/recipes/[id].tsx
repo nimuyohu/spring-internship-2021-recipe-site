@@ -17,24 +17,32 @@ export const RecipePage: NextPage<Props> = (props) => {
     return (
         <div>
             <Head>
-                <title>{recipe.title}</title>
-                <meta name="twitter:card" content="summary" />
-                `<meta property="og:url" content={`https://spring-internship-2021-recipe-site-nimuyohu.vercel.app/${recipe.id}`} />
-                <meta property="og:title" content={ recipe.title } />
-                <meta property="og:description" content={ recipe.description } />
-                {recipe.image_url ? 
-                (
-                <meta property="og:image" content={ recipe.image_url } />
+                {recipe ? (
+                    <>
+                    <title>{recipe.title}</title>
+                    <meta name="twitter:card" content="summary" />
+                    `<meta property="og:url" content={`https://spring-internship-2021-recipe-site-nimuyohu.vercel.app/${recipe.id}`} />
+                    <meta property="og:title" content={ recipe.title } />
+                    <meta property="og:description" content={ recipe.description } />
+                    {recipe.image_url ? 
+                    (
+                    <meta property="og:image" content={ recipe.image_url } />
+                    )
+                    :
+                    (
+                    <meta property="og:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
+                    )}
+                    </>
+                ) : (
+                    <title>見つかりませんでした</title>
                 )
-                :
-                (
-                <meta property="og:image" content={'https://3.bp.blogspot.com/-xiuGiiu17G8/VvpdptbU5PI/AAAAAAAA5Ro/wn_Nhl4mmdsMZymsGX4D5lKuANf8lrdww/s800/cooking_frypan_teflon.png'} />
-                )}
+                }
+                
             </Head>
             <Header />
             <Container >
             <Input />
-            {recipe && (
+            {recipe.message !== 'Not Found' ? (
                 <main>
                     {recipe.image_url ? (
                         <>
@@ -97,6 +105,10 @@ export const RecipePage: NextPage<Props> = (props) => {
                         </tbody>
                     </Table>
                 </main>
+            ) : (
+                <>
+                <h1>見つかりませんでした。</h1>
+                </>
             )}
 
             </Container>
@@ -115,6 +127,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         
     } else {
         const recipe = await getRecipe(id);
+        console.log(recipe)
 
         return {
             props: {
