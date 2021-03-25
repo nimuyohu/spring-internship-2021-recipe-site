@@ -18,7 +18,7 @@ export const RecipePage: NextPage<Props> = (props) => {
         <div>
             <Head>
                 <title>{recipe.title}</title>
-                <meta name="twitter:card" content="card" />
+                <meta name="twitter:card" content="summary" />
                 `<meta property="og:url" content={`https://spring-internship-2021-recipe-site-nimuyohu.vercel.app/${recipe.id}`} />
                 <meta property="og:title" content={ recipe.title } />
                 <meta property="og:description" content={ recipe.description } />
