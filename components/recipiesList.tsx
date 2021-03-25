@@ -28,7 +28,12 @@ export const RecipesList: FC<Props>= (props) => {
                                     </Link>
                                     ) : (
                                     <Link href={`recipes/${recipe.id}`}>
-                                        <Card.Img variant="top" src='/images/noimage.png' />
+                                        <Image
+                                            src='https://1.bp.blogspot.com/-D2I7Z7-HLGU/Xlyf7OYUi8I/AAAAAAABXq4/jZ0035aDGiE5dP3WiYhlSqhhMgGy8p7zACNcBGAsYHQ/s1600/no_image_square.jpg'
+                                            alt="Not Found Image"
+                                            width={800}
+                                            height={500}
+                                        />
                                     </Link>
                 )}
                 <Card.Body>
