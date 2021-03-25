@@ -56,6 +56,8 @@ export type Response = {
         next?: string;
         prev?: string;
     };
+
+    message?: string
 }
 
 export async function searchRecipes(keyword: string,page: number): Promise<Response | null> {

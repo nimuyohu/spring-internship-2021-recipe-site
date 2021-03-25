@@ -201,7 +201,7 @@ export const getServerSideProps: GetServerSideProps = async (context: any) => {
             const response = await searchRecipes(context.query.keyword.toString(),context.query.page)
             console.log(context.query)
             console.log(response)
-            if (response.message == 'Not Found'){
+            if (response != null && response.message == 'Not Found'){
                 return {
                     props: {
                         recipeFound: false,
