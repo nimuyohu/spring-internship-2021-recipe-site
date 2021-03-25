@@ -46,6 +46,16 @@ const TopPage: NextPage<Props> = (props) => {
         }
     };
 
+    function getParam(name: string, url: string) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     const onSearchClick = () => {
         const search = document.getElementById('search') as HTMLInputElement;
         if (search.value === ''){
@@ -61,18 +71,15 @@ const TopPage: NextPage<Props> = (props) => {
         if (paramsString === 'https://internship-recipe-api.ckpd.co/recipes'){
             router.push({query: {page :1}})
         } else {
-            let searchParams = new URLSearchParams(paramsString);
-            console.log(searchParams)
-            // alert(searchParams.get('page'))
-            const pageNumber = searchParams.get('https://internship-recipe-api.ckpd.co/recipes?page')
-            router.push({query: {page :pageNumber}})
+            let num = 0;
+            num = Number(getParam('page',location.href)) + 1
+            router.push({query: {page :num}})
         }
     }
 
     const GoToNextPage = () => {
         let paramsString = links.next;
         let searchParams = new URLSearchParams(paramsString);
-
         const pageNumber = searchParams.get('https://internship-recipe-api.ckpd.co/recipes?page')
             router.push({query: {page :pageNumber}})
     }

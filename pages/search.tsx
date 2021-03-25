@@ -72,47 +72,18 @@ const TopPage: NextPage<Props> = (props) => {
     }
 
     const GoToNextPage = () => {
-        let str = links.next as string ;
-        
-        str = reverseString(str);
-        console.log(str)
-        let num = '';
-        if (str){
-            for (let i=0;i<str.length;i++){
-                if (str[i] === '='){
-                    break
-                }else{
-                    num += str[i];
-                }
-            }
-        
-        num=reverseString(num)
-        }
-        var url = location.search;
-        console.log(url)
+        let num = 0;
+        num = Number(getParam('page',location.href)) + 1
         router.push({query: {keyword :getParam('keyword',location.href),page :Number(num)}})
-        
     }
 
     const GoToPrevPage = () => {
-        let str = links.prev as string ;
         if (getParam('page',location.href) === '2'){
             router.push({query: {keyword :getParam('keyword',location.href),page :1}})
         } else {
-        str = reverseString(str);
-        let num = '';
-        if (str){
-            for (let i=0;i<str.length;i++){
-                if (str[i] === '='){
-                    break
-                }else{
-                    num += str[i];
-                }
-            }
-        num=reverseString(num)
-        }
-        var url = location.search;
-        router.push({query: {keyword :getParam('keyword',location.href),page :Number(num)}})
+        let num = 0;
+        num = Number(getParam('page',location.href)) - 1
+        router.push({query: {keyword :getParam('keyword',location.href),page :num}})
         }
     }
     
