@@ -105,9 +105,15 @@ const TopPage: NextPage<Props> = (props) => {
                     <Row>
                         <Col >
                             <Card>
-                            <Link href={`recipes/${recipe.id}`}>
-                                <Card.Img variant="top" src={recipe.image_url} />
-                            </Link>
+                            {recipe.image_url ? (
+                                <Link href={`recipes/${recipe.id}`}>
+                                    <Card.Img variant="top" src={recipe.image_url} />
+                                </Link>
+                                ) : (
+                                    <Card.Title>
+                                        Not Found Image
+                                    </Card.Title>
+                                    )}
                             <Card.Body>
                                 <Link href={`recipes/${recipe.id}`}>
                                     <Card.Title>{recipe.title}</Card.Title>
