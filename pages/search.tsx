@@ -103,10 +103,10 @@ const TopPage: NextPage<Props> = (props) => {
                 </div>
             )}
 
-            <Row>
-            {links?.prev && <Col><Button onClick={GoToPrevPage} className='mb-3' >←前のページ</Button></Col>} 
-            {links?.next && <Col><Button onClick={GoToNextPage} className='mb-3 text-center' >次のページ→</Button></Col>}
-            </Row>
+                <div className="form-group row justify-content-center">
+                    {links?.prev && <Button onClick={GoToPrevPage} className='mb-3 mr-3' >←前のページ</Button>} 
+                    {links?.next && <Button onClick={GoToNextPage} className='mb-3 ml-3' >次のページ→</Button>}
+                </div>
         </Container>
         </div>
     );
